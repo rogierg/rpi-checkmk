@@ -12,7 +12,7 @@ To run a container:
 
 ## Building
 Clone my repository:
-`git clone https://github.com/rogierg/rpi-checmk`
+`git clone https://github.com/rogierg/rpi-checkmk`
 
 Build:
 `sudo docker build -t rogierg/rpi-checkmk:0.0.1`
