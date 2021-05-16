@@ -9,3 +9,9 @@ If you want to persist your configuration, make sure to provide a volume for /om
 
 To run a container:
 `sudo docker run -d --name checkmk -v /opt/omd/sites:/opt/omd/sites -p 5000:5000 rogierg/rpi-checkmk:latest`
+
+## Building
+Clone my repository:
+`git clone https://github.com/rogierg/rpi-checmk`
+Build:
+`sudo docker build -t rogierg/rpi-checkmk:0.0.1`
