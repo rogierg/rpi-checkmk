@@ -7,5 +7,13 @@ echo "     |__|     "
 if [ ! -d /omd/sites/mon ]; then
   ./init.sh
 fi
+if ! id mon &>/dev/null; then
+    groupadd -g 1000 mon
+    useradd -g 1000 -u 1000 -ms /bin/bash -d /omd/sites/mon mon
+    usermod -aG mon www-data
+    usermod -aG omd mon
+    omd enable mon
+else
 omd start mon
 sleep infinity
+

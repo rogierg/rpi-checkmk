@@ -10,9 +10,15 @@ If you want to persist your configuration, make sure to provide a volume for /om
 To run a container:
 `sudo docker run -d --name checkmk -v /opt/omd/sites:/opt/omd/sites -p 5000:5000 rogierg/rpi-checkmk:latest`
 
+## Upgrading an older version
+Open a shell inside the checkmk container:
+`sudo docker exec -it checkmk /bin/sh`
+Run the upgrade script:
+`upgrade.sh`
+
 ## Building
 Clone my repository:
 `git clone https://github.com/rogierg/rpi-checkmk`
 
 Build:
-`sudo docker build -t rogierg/rpi-checkmk:0.0.1`
+`sudo docker build --no-cache -t rogierg/rpi-checkmk:[version] .`
