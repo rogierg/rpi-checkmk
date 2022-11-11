@@ -16,4 +16,4 @@ if ! id mon &>/dev/null; then
 else
 omd start mon
 sleep infinity
-
+fi
