@@ -1,14 +1,17 @@
-FROM balenalib/raspberry-pi-debian:latest
-MAINTAINER Rogier Gerritse <rogierg@electronicsamurai.com>
+FROM ubuntu:jammy
+LABEL org.opencontainers.image.authors="Rogier Gerritse <rogierg@electronicsamurai.com>,Jimmy Bristow <jbristow@home-lab.tech>"
+
+ENV TZ="America/Chicago"
+ENV DEBIAN_FRONTEND="noninteractive"
 
 RUN apt-get update && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends curl lsb-release apt-utils || true && \
-  curl -LO $(curl -s https://api.github.com/repos/chrisss404/check-mk-arm/releases/tags/2.0.0p4 | grep browser_download_url | cut -d '"' -f 4 | grep buster_armhf.deb) && \
-  dpkg -i check-mk-raw-*.buster_armhf.deb || true && \
-  rm check-mk-raw-*.buster_armhf.deb && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -f --no-install-recommends && \
-  DEBIAN_FRONTEND=noninteractive apt-get autoremove -y && \
-  DEBIAN_FRONTEND=noninteractive apt-get clean -y && \
+  apt-get install -y --no-install-recommends curl lsb-release || true && \
+  curl -O $(curl -s https://api.github.com/repos/chrisss404/check-mk-arm/releases/latest | grep browser_download_url | cut -d '"' -f 4 | grep jammy_arm64.deb) \
+  dpkg -i check-mk-raw-*.jammy_arm64.deb || true && \
+  rm check-mk-raw-*.jammy_arm64.deb && \
+  apt-get install -y -f --no-install-recommends && \
+  apt-get autoremove -y && \
+  apt-get clean -y && \
   rm -rf /var/lib/apt/lists/*
 EXPOSE 5000/tcp
 WORKDIR /app
