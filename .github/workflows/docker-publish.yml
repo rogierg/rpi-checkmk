@@ -71,7 +71,8 @@ jobs:
       - name: Pull Package
         id: pull-package
         run: |
-          apt-get install -y --no-install-recommends wget curl
+          # apt-get install -y --no-install-recommends wget curl
+          # May have to try to get this working in container again. Sometimes it fails outside.
           wget $(curl -s https://api.github.com/repos/chrisss404/check-mk-arm/releases/latest | grep browser_download_url | cut -d '"' -f 4 | grep jammy_arm64.deb)
 
       # Build and push Docker image with Buildx (don't push on PR)
