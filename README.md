@@ -1,6 +1,8 @@
 # rpi-checkmk
 Check_mk 2.0 as a docker container for Raspberry Pi/ARM7
 
+## Currently Working on streamingling builds and initial set, env variables etc
+
 This dockerfile provides a runnable version of Check_mk 2.0 for the ARM7 architecture, based on chrisss404/check-mk-arm with some ideas from hbel/rpi-omd.
 
 The installed omd environment is called `mon` and will be published on port 5000
