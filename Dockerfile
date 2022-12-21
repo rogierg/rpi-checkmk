@@ -8,9 +8,12 @@ COPY *.deb /tmp/
 
 RUN apt-get update && \
   apt-get install -y --no-install-recommends lsb-release || true && \
+  echo 'Installing package' && \
   dpkg -i /tmp/check-mk-raw-*.jammy_arm64.deb || true && \
   rm /tmp/check-mk-raw-*.jammy_arm64.deb && \
+  echo 'Removing package' && \
   apt-get install -y -f --no-install-recommends && \
+  echo 'Installing package requirements' && \
   apt-get autoremove -y && \
   apt-get clean -y && \
   rm -rf /var/lib/apt/lists/*
