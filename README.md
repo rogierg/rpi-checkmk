@@ -1,8 +1,7 @@
 # rpi-checkmk
 Check_mk 2.0 as a docker container for Raspberry Pi/ARM7
 
-## Currently Working on streamingling builds and initial set, env variables etc
-- [ ] Specify host IP
+## Currently Working on streamlining builds and initial set, env variables etc
 - [ ] Specify default site name
 - [ ] Better Startup/entry Points
 
