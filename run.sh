@@ -10,7 +10,7 @@ fi
 if ! id monitor &>/dev/null; then
   groupadd -g 1000 monitor
   useradd -g 1000 -u 1000 -ms /bin/bash -d /omd/sites/monitor monitor
-  usermod -aG mon www-data
+  usermod -aG monitor www-data
   usermod -aG omd monitor
   omd enable monitor
 else
