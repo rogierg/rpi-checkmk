@@ -3,17 +3,20 @@ LABEL org.opencontainers.image.authors="Rogier Gerritse <rogierg@electronicsamur
 
 ENV TZ="America/Chicago"
 ENV DEBIAN_FRONTEND="noninteractive"
+# ENV CODENAME="jammy"
 
-COPY *.deb /tmp/
 
 RUN apt-get update && \
-  apt-get install -y --no-install-recommends lsb-release || true && \
+  dpkg --print-architecture && \
+  ARCH=$(dpkg --print-architecture) && \
+  apt-get install -y --no-install-recommends lsb-release curl ca-certificates || true && \
+  curl -LO $(curl -s https://api.github.com/repos/chrisss404/check-mk-arm/releases/latest | grep browser_download_url | cut -d '"' -f 4 | grep jammy_$ARCH.deb) && \
   echo 'Installing package' && \
-  dpkg -i /tmp/check-mk-raw-*.jammy_arm64.deb || true && \
-  rm /tmp/check-mk-raw-*.jammy_arm64.deb && \
-  echo 'Removing package' && \
-  apt-get install -y -f --no-install-recommends && \
+  dpkg -i /tmp/check-mk-raw-*.jammy_$ARCH.deb || true && \
   echo 'Installing package requirements' && \
+  apt-get install -y -f --no-install-recommends && \
+  echo 'Cleaning up...' && \
+  rm /tmp/check-mk-raw-*.jammy_$ARCH.deb && \
   apt-get autoremove -y && \
   apt-get clean -y && \
   rm -rf /var/lib/apt/lists/*

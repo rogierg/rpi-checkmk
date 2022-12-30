@@ -2,8 +2,9 @@
 Check_mk 2.0 as a docker container for Raspberry Pi/ARM7
 
 ## Currently Working on streamlining builds and initial set, env variables etc
-- [ ] Specify default site name
-- [ ] Better Startup/entry Points
+- [X] Specify default site name
+- [X] Better Startup/entry Points
+- [ ] Work on building 32bit arm/v7/hf based on bullseye (Possibly test it on jammy)
 
 This dockerfile provides a runnable version of Check_mk 2.0 for the ARM7 architecture, based on chrisss404/check-mk-arm with some ideas from hbel/rpi-omd.
 
