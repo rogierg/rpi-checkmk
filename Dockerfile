@@ -26,5 +26,6 @@ HEALTHCHECK --interval=1m --timeout=5s \
     CMD omd status || exit 1
 
 COPY docker-entrypoint.sh /
+RUN chmod +x docker-entrypoint.sh
 WORKDIR /app
 ENTRYPOINT ["/docker-entrypoint.sh"]
