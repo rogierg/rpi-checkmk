@@ -23,7 +23,7 @@ RUN apt-get update && \
   echo 'Installing package requirements' && \
   apt-get install -y -f --no-install-recommends && \
   echo 'Cleaning up...' && \
-  rm check-mk-raw-*.jammy_$ARCH.deb && \
+  rm check-mk-raw-*.${CODENAME}_${ARCH}.deb && \
   apt-get autoremove -y && \
   apt-get clean -y && \
   rm -rf /var/lib/apt/lists/*
