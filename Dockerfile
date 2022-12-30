@@ -12,11 +12,11 @@ RUN apt-get update && \
   apt-get install -y lsb-release curl ca-certificates || true && \
   curl -LO $(curl -s https://api.github.com/repos/chrisss404/check-mk-arm/releases/latest | grep browser_download_url | cut -d '"' -f 4 | grep jammy_$ARCH.deb) && \
   echo 'Installing package' && \
-  dpkg -i /tmp/check-mk-raw-*.jammy_$ARCH.deb || true && \
+  dpkg -i check-mk-raw-*.jammy_$ARCH.deb || true && \
   echo 'Installing package requirements' && \
   apt-get install -y -f --no-install-recommends && \
   echo 'Cleaning up...' && \
-  rm /tmp/check-mk-raw-*.jammy_$ARCH.deb && \
+  rm check-mk-raw-*.jammy_$ARCH.deb && \
   apt-get autoremove -y && \
   apt-get clean -y && \
   rm -rf /var/lib/apt/lists/*
