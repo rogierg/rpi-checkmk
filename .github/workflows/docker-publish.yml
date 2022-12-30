@@ -79,28 +79,34 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      # - name: Pull Package
-      #   id: pull-package
-      #   run: |
-      #     # apt-get install -y --no-install-recommends wget curl
-      #     # May have to try to get this working in container again. Sometimes it fails outside.
-      #     wget $(curl -s https://api.github.com/repos/chrisss404/check-mk-arm/releases/latest | grep browser_download_url | cut -d '"' -f 4 | grep jammy_arm64.deb)
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
-      - name: Build and push Docker image
+      - name: Build and push Docker image arm64
         id: build-and-push
         uses: docker/build-push-action@c56af957549030174b10d6867f20e78cfd7debc5
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: jzjad/rpi-checkmk-arm64:latest
+          labels: ${{ steps.meta.outputs.labels }},arm64
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: linux/arm64
-      #Holding off on linux/arm/v7
 
+
+
+      - name: Build and push Docker image armhf
+        id: build-and-push
+        uses: docker/build-push-action@c56af957549030174b10d6867f20e78cfd7debc5
+        with:
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: jzjad/rpi-checkmk-armhf:latest
+          labels: ${{ steps.meta.outputs.labels }},armhf,armv7
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/arm/v7
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
