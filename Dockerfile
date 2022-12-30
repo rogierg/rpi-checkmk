@@ -3,7 +3,6 @@ LABEL org.opencontainers.image.authors="Rogier Gerritse <rogierg@electronicsamur
 
 ENV TZ="America/Chicago"
 ENV DEBIAN_FRONTEND="noninteractive"
-# ENV CODENAME="jammy"
 
 
 RUN apt-get update && \
@@ -22,7 +21,10 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 
-EXPOSE 5000/tcp
+EXPOSE 5000 6557
+HEALTHCHECK --interval=1m --timeout=5s \
+    CMD omd status || exit 1
+
+COPY docker-entrypoint.sh /
 WORKDIR /app
-COPY *.sh /app/
-CMD ["sh", "/app/docker-entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
