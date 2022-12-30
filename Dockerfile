@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND="noninteractive"
 RUN apt-get update && \
   dpkg --print-architecture && \
   ARCH=$(dpkg --print-architecture) && \
-  apt-get install -y --no-install-recommends lsb-release curl ca-certificates || true && \
+  apt-get install -y lsb-release curl ca-certificates || true && \
   curl -LO $(curl -s https://api.github.com/repos/chrisss404/check-mk-arm/releases/latest | grep browser_download_url | cut -d '"' -f 4 | grep jammy_$ARCH.deb) && \
   echo 'Installing package' && \
   dpkg -i /tmp/check-mk-raw-*.jammy_$ARCH.deb || true && \
@@ -20,8 +20,9 @@ RUN apt-get update && \
   apt-get autoremove -y && \
   apt-get clean -y && \
   rm -rf /var/lib/apt/lists/*
+
+
 EXPOSE 5000/tcp
 WORKDIR /app
 COPY *.sh /app/
-CMD ["sh", "/app/run.sh"]
-
+CMD ["sh", "/app/docker-entrypoint.sh"]
