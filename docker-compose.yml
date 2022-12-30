@@ -1,0 +1,15 @@
+version: '3.6'
+services:
+    checkmk-arm:
+        container_name: checkmk
+        volumes:
+            - './sites:/opt/omd/sites'
+        environment:
+            - CMK_SITE_ID=Monitor
+        ports:
+            - '5000:5000'
+            - '8000:8000'
+        #arm64 - based on ubuntu:jammy
+        image: 'ghcr.io/jzjad/rpi-checkmk-arm64:latest'
+        #armv7/hf - based on debian:bullseye
+        #image: 'ghcr.io/jzjad/rpi-checkmk-armhf:latest'
