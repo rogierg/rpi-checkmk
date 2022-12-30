@@ -19,7 +19,7 @@ RUN apt-get update && \
   apt-get install -y lsb-release curl ca-certificates || true && \
   bash get-package.sh && \
   echo 'Installing package' && \
-  dpkg -i check-mk-raw-*.jammy_$ARCH.deb || true && \
+  dpkg -i check-mk-raw-*.${CODENAME}_${ARCH}.deb || true && \
   echo 'Installing package requirements' && \
   apt-get install -y -f --no-install-recommends && \
   echo 'Cleaning up...' && \
