@@ -83,7 +83,7 @@ jobs:
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image arm64
-        id: build-and-push
+        id: build-and-push-arm64
         uses: docker/build-push-action@c56af957549030174b10d6867f20e78cfd7debc5
         with:
           context: .
@@ -97,7 +97,7 @@ jobs:
 
 
       - name: Build and push Docker image armhf
-        id: build-and-push
+        id: build-and-push-armhf
         uses: docker/build-push-action@c56af957549030174b10d6867f20e78cfd7debc5
         with:
           context: .
