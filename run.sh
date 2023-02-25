@@ -14,6 +14,6 @@ if ! id mon &>/dev/null; then
     usermod -aG omd mon
     omd enable mon
 else
-omd start mon
-sleep infinity
-
+    omd start mon
+    sleep infinity
+fi
