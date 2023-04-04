@@ -20,5 +20,4 @@ else
 =======
 omd start mon
 sleep infinity
->>>>>>> ae74061eaf158957c14cbde1ef8c2b980bd01b5b
 fi
